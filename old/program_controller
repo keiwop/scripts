@@ -1,0 +1,44 @@
+#!/bin/sh
+
+board="Pro Micro"
+serialport="/dev/ACM1"
+programmer="avr109"
+speed="57600"
+controller="atmega32u4"
+memory="flash"
+firmware="Soarer_at2usb_v1.10_atmega32u4.hex"
+
+cd /home/_/scripts
+
+if [ "$board" == "Pro Micro" ]; then
+	./reset_promicro
+	echo "$board reset is done..."
+fi
+
+echo "Writing hex to $board"
+
+avrdude -v -v -v -v -D -P$serialport -c$programmer -b$speed -p$controller -U$memory:w:$firmware:i
+
+if [ $# -eq 0 ]; then
+	print_usage
+fi
+
+while [ $# -gt 0 ]; do
+	if [ $1 = "--help" ] || [ $1 = "-h" ]; then
+		print_help
+		exit
+	elif [ $1 = "--file" ] || [ $1 = "-f" ]; then
+		LIST=false
+	elif [ $1 = "--show" ] || [ $1 = "-s" ]; then
+		SHOW=true
+	elif [ -f $1 ]; then
+		if [ `echo "$1" | awk -F . '{print $NF}'` = "desktop" ]; then
+			LIST=false
+			LIST_FILE="`readlink -f $1`"
+		else
+			LIST=true
+			LIST_FILE="`readlink -f $1`"
+		fi
+	fi
+	shift
+done

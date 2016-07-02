@@ -1,0 +1,2 @@
+
+echo 80 > /sys/class/backlight/acpi_video1/brightness

@@ -1,0 +1,4 @@
+#! /bin/sh
+
+sleep 4000
+systemctl suspend

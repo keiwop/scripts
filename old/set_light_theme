@@ -1,0 +1,18 @@
+#! /bin/sh
+
+dir_guake="/home/keiwop/.config/gconf/apps/guake"
+
+echo "Setting light theme"
+
+#Choose solarized light font color palette
+cat > $dir_guake/style/font/%gconf.xml << EOF
+<?xml version="1.0"?>
+<gconf>
+	<entry name="palette_name" mtime="1438001093" type="string">
+		<stringvalue>Solarized Light</stringvalue>
+	</entry>
+	<entry name="palette" mtime="1438001093" type="string">
+		<stringvalue>#000027273131:#D0D01B1B2424:#727289890505:#A5A577770505:#20207575C7C7:#C6C61B1B6E6E:#252591918585:#E9E9E2E2CBCB:#00001E1E2626:#BDBD36361212:#46465A5A6161:#525267676F6F:#707081818383:#58585656B9B9:#818190908F8F:#FCFCF4F4DCDC:#525267676F6F:#FCFCF4F4DCDC</stringvalue>
+	</entry>
+</gconf>
+EOF

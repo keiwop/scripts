@@ -1,0 +1,12 @@
+#!/usr/bin/zsh
+set -x
+upper_to_lower(){
+	echo "123456"
+	files_to_move='./*'
+	if [ $# -eq 1 ]; then
+		files_to_move=$1
+	fi
+	for i in `ls $files_to_move`; do
+		echo $i && echo $i | sed -e 's:\(.*\):\L\1:'
+	done
+}

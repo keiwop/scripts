@@ -1,0 +1,20 @@
+#!/bin/sh
+
+board="Pro Micro"
+serialport="/dev/ACM1"
+programmer="avr109"
+speed="57600"
+controller="atmega32u4"
+memory="flash"
+firmware="Soarer_at2usb_v1.10_atmega32u4.hex"
+
+cd /home/_/scripts
+
+if [ board = "Pro Micro"]; then
+	. reset_promicro
+	echo "$board reset is done..."
+fi
+
+echo "Writing hex to $board"
+
+avrdude -v -v -v -v -D -P$serialport -c$programmer -b$speed -p$controller -U$memory:w:$firmware:i
